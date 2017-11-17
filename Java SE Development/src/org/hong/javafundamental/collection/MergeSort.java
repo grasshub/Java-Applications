@@ -16,7 +16,7 @@ public class MergeSort {
 	@SuppressWarnings("unchecked")
 	private static <E> List<Comparable<E>> merge(List<? extends Comparable<E>> left, List<? extends Comparable<E>> right) {
 		
-		List<Comparable<E>> result = new ArrayList<Comparable<E>>();
+		List<Comparable<E>> result = new ArrayList<>();
 		
 		while (left.size() > ZERO || right.size() > ZERO) 
 			if (left.size() > ZERO && right.size() > ZERO)
@@ -45,8 +45,8 @@ public class MergeSort {
 			return list;
 		
 		// else list size is greater than 1, so split the list into two sublists
-		List<Comparable<E>> left = new ArrayList<Comparable<E>>();
-		List<Comparable<E>> right = new ArrayList<Comparable<E>>();
+		List<Comparable<E>> left = new ArrayList<>();
+		List<Comparable<E>> right = new ArrayList<>();
 		int middle = list.size() / TWO;
 		
 		left.addAll(list.subList(ZERO, middle));
