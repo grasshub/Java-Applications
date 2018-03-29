@@ -5,6 +5,24 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Generics {
+	
+	// PECS Producer extends, Consumer super for pass in arguments to generic API methods.
+	/* If pass in argument produces the element in API method, you could pass in ? extends E
+	as wildcard type argument to method, if pass in argument consumes the element from API method,
+	you could pass in ? super E to method. If argument is both producer and consumer, then
+	you could only pass in same element type E. If argument is neither producer nor consumer,
+	you could only pass in element type as ? meaning any type.
+	The return type could not contain wildcard type since otherwise user needs to deal with it.
+	For example, there is Stack<E> with void pushAll(Collection<E> src);
+										void popAll(Collection<E> dst);
+	those two methods should change to: void pushAll(Collection<? extends E> src);
+										void popAll(Collection<? super E> dst);
+	to make them more flexible.
+	For instance, Caller can now pushAll from a collection<Long> or Collection<Number> onto
+	a Stack<Number>.
+	Call can now popAll into a Collection<Object> or Collection<Number> from a Stack<Number>.
+	Since List<Long> is not subtype of List<Number>.
+	*/
 
 	List<? extends Number> nuList;
 
@@ -16,9 +34,7 @@ public class Generics {
 		return count;
 	}
 
-	private class Person {
-
-	}
+	private class Person {}
 
 	public static void addNumbers(List<? super Integer> list) {
 		for (int i = 1; i <= 10; i++) {
@@ -142,7 +158,6 @@ public class Generics {
 			Class<?> pers = Class.forName("org.hong.javafundamental.generics.Generics$Person");
 			System.out.println(pers.toString());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -187,6 +202,7 @@ public class Generics {
 
 		numberA = new NaturalNumber<Double>(2.0);
 		System.out.println("Even number: " + numberA.isEven());
+			
 	}
 
 }
