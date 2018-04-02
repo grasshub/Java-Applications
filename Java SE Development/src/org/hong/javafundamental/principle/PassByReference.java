@@ -4,7 +4,7 @@ public class PassByReference {
 	
 	public static void main(String[] arg) {
 		
-		Person person = new Person("Mark");
+		Person person = new Person("Mark", 22);
 		// try pass by reference here
 		Person anotherPerson = person.changePerson(person);
 		

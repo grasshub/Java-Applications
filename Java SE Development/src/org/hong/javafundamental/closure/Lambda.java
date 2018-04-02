@@ -1,9 +1,15 @@
 package org.hong.javafundamental.closure;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.hong.javafundamental.principle.Person;
 
@@ -31,6 +37,38 @@ public class Lambda {
 	private static int doubleIt(int integer) {
 		System.out.println("doubleIt for integer: " + integer);
 		return integer * 2;
+	}
+	
+	public static boolean isPrime(int number) {
+		return number > 1 && 
+			IntStream.range(2, number)
+					 .noneMatch(i -> number % i == 0);
+	}
+	
+	public static List<Double> sqrtOfFirst100Primes() {
+		// collect method use Collectors to accumulating elements into 
+		// collections, summarizing elements.
+		
+		// All the methods except the last one is intermediate methods that do
+		// accumulation, the last one is terminal method, until the terminal
+		// method is called, all the intermediate methods will be invoked.
+		// Otherwise, due to laziness of invocation, they will not be called.
+		List<Double> sqrtOfFirst100Primes = 
+			Stream.iterate(2, e -> e + 1)
+				  .filter(Lambda::isPrime)
+				  .map(Math::sqrt)
+				  .limit(100)
+				  .collect(Collectors.toList());
+		
+		return sqrtOfFirst100Primes;
+	}
+	
+	private static void printSorted(List<Person> people, 
+		Comparator<Person> comparator) {
+		// Print the sorted list without change the original list
+		people.stream()
+			  .sorted(comparator)
+			  .forEach(System.out::println);
 	}
 	
 	public static void main(String[] args) {
@@ -86,7 +124,7 @@ public class Lambda {
 		int i = 10;
 		// You could use object as shared variable, so inside lambda could 
 		// modify its state.
-		Person person = new Person("John Doe");
+		Person person = new Person("John", 44);
 		
 		// Add i + = 1 to increase the i value inside lambda expression before
 		// return i, you will get compilation error: Local variable i defined in
@@ -109,6 +147,17 @@ public class Lambda {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		List<Person> people = Arrays.asList(
+			new Person("Sara", 12),
+			new Person("Mark", 43),
+			new Person("Bob", 12),
+			new Person("Jill", 64));
+		
+		printSorted(people, 
+			Comparator.comparing(Person::getAge).thenComparing(Person::getName));
+		
+		people.removeIf(p -> p.getAge() < 18);
 		
 	}
 }
