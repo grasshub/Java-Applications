@@ -31,17 +31,9 @@ public class DeadLock {
 		final Friend john = new Friend("John");
 		final Friend dave = new Friend("Dave");
 		
-		new Thread(new Runnable() {
-			public void run() {
-				john.bow(dave);
-			}
-		}).start();
+		new Thread(() -> john.bow(dave)).start();
 		
-		new Thread(new Runnable() {
-			public void run() {
-				dave.bow(john);
-			}
-		}).start();			
+		new Thread(() -> dave.bow(john)).start();
 	}
 
 }

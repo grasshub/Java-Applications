@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class AtomicCounter {
 	
-	private AtomicInteger count = new AtomicInteger(0);
+	private final AtomicInteger count = new AtomicInteger(0);
 	
 	public void increment() {
 		int oldValue = count.getAndIncrement();

@@ -7,11 +7,10 @@ import java.util.Properties;
 
 public class PropertiesUtils {
 	
-	private static final String DEFAULT_PROPERTIES = "Properties File/default.properties";
-	private static final String APPLICATION_PROPERTIES = "Properties File/application.properties";
+	private static final String DEFAULT_PROPERTIES = "Java SE Development/Properties File/default.properties";
+	private static final String APPLICATION_PROPERTIES = "Java SE Development/Properties File/application.properties";
 	// Indicates if both properties files are already loaded
 	private static boolean loaded = false;
-	private static Properties defaultProperties = null;
 	private static Properties applicationProperties = null;
 	
 	private static void loadProperties() throws IOException {
@@ -21,7 +20,7 @@ public class PropertiesUtils {
 		FileInputStream inStream = null;
 
 		try {
-			defaultProperties = new Properties();
+			Properties defaultProperties = new Properties();
 			in = new FileInputStream(DEFAULT_PROPERTIES);
 			defaultProperties.load(in);
 

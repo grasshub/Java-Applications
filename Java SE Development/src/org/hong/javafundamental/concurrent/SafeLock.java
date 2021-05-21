@@ -1,12 +1,13 @@
 package org.hong.javafundamental.concurrent;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class SafeLock {
 	
-	private final static int ONE_SECOND = 1000;
+	private static final int ONE_SECOND = 1000;
 	
 	private static class Friend {
 		
@@ -67,8 +68,9 @@ public class SafeLock {
 	
 	private static class BowLoop implements Runnable {
 		
-		private Friend bowee;
-		private Friend bower;
+		private final Friend bowee;
+		private final Friend bower;
+		private final Random random = new Random(); // SecureRandom is preferred to Random
 		
 		public BowLoop(Friend bowee, Friend bower) {
 			this.bowee = bowee;
@@ -77,13 +79,12 @@ public class SafeLock {
 		
 		public void run() {
 			
-			Random random = new Random();
-			
 			for (;;) {
 				try {
 					Thread.sleep(random.nextInt(ONE_SECOND));
 				} catch (InterruptedException ex) {
 					// Ignore
+					Thread.currentThread().interrupt();
 				}
 				
 				bowee.bow(bower);

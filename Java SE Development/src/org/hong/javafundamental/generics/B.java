@@ -5,8 +5,8 @@ public class B extends A implements Cloneable {
 	private int c;
 		
 	public B(int c) {
+		super();
 		this.c = c;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public int getC() {
@@ -19,7 +19,7 @@ public class B extends A implements Cloneable {
 	
 	public Object clone() throws CloneNotSupportedException {
 		
-		return (B)super.clone();
+		return super.clone();
 	}
 
 }

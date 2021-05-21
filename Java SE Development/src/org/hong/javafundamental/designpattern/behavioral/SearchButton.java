@@ -5,7 +5,7 @@ import javax.swing.JButton;
 public class SearchButton extends JButton implements Client {
 
 	private static final long serialVersionUID = 5494735170747528063L;
-	private Mediator mediator;
+	private final transient Mediator mediator;
 	
 	public SearchButton(Mediator mediator) {
 		super("Search");

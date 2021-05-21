@@ -2,7 +2,7 @@ package org.hong.javafundamental.util;
 
 public final class OsUtils
 {
-   private static String OS = null;
+   private static final String OS = null;
    
    public static String getOsName()
    {

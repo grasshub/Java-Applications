@@ -2,11 +2,13 @@ package org.hong.javafundamental.designpattern.architectural;
 
 public class ServiceLocator {
 	
-	private static Cache cache;
+	private static final Cache cache;
 	
 	static {
 		cache = new Cache();
 	}
+
+	private ServiceLocator() {}
 	
 	public static Service getService(String jndiName) {
 		

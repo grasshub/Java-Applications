@@ -5,16 +5,14 @@ import java.util.Map;
 
 public class CoffeeFlavorFactory {
 	
-	private static Map<String, CoffeeFlavor> coffeeFlavors = new HashMap<String, CoffeeFlavor>();
+	private static final Map<String, CoffeeFlavor> coffeeFlavors = new HashMap<>();
+
+	private CoffeeFlavorFactory() {}
 	
 	public static CoffeeFlavor getCoffeeFlavor(String flavorName) {
-		CoffeeFlavor coffeeFlavor = coffeeFlavors.get(flavorName);
-		
-		if (coffeeFlavor == null) {
-			coffeeFlavor = new ConcreteCoffeeFlavor(flavorName);
-			coffeeFlavors.put(flavorName,coffeeFlavor);
-		}
-		return coffeeFlavor;
+		return coffeeFlavors.get(flavorName) == null?
+				coffeeFlavors.putIfAbsent(flavorName, new ConcreteCoffeeFlavor(flavorName))
+				: coffeeFlavors.get(flavorName);
 	}
 
 	public static int getTotalCoffeeFlavors() {

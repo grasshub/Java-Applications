@@ -4,17 +4,17 @@ import java.util.List;
 
 public class Adapter implements IAdapter {
 
-	private Adaptee adaptee = new Adaptee();
+	private final Adaptee adaptee = new Adaptee();
 	
 	public void printList(List<String> stringList) {
 		
-		String tempString = ""; 
+		StringBuilder tempString = new StringBuilder();
 		
 		for (String string: stringList) {
-			tempString = tempString + string + "\n";
+			tempString.append(string).append("\n");
 		}
 		
-		adaptee.printString(tempString);
+		adaptee.printString(tempString.toString());
 		
 	}
 }

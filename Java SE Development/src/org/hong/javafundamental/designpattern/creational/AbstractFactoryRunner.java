@@ -24,7 +24,6 @@ public class AbstractFactoryRunner {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
 		GUIFactory factory = null;
 		
 		/*

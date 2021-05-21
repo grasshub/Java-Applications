@@ -35,7 +35,7 @@ public class ModifyXML {
 	private static final String YES = "yes";
 	private static final String INDENT_URL = "{http://xml.apache.org/xslt}indent-amount";
 	private static final String FOUR = "4";
-	private static final String FOURTY = "40";
+	private static final String FORTY = "40";
 	
 	public static void main(String[] args) {
 		
@@ -58,7 +58,7 @@ public class ModifyXML {
 			
 			// append a new element to staff
 			Element age = document.createElement(AGE);
-			age.appendChild(document.createTextNode(FOURTY));
+			age.appendChild(document.createTextNode(FORTY));
 			staff.appendChild(age);
 			
 			// loop the staff child node
@@ -95,11 +95,7 @@ public class ModifyXML {
 			pce.printStackTrace();
 		} catch (TransformerException te) {
 			te.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (SAXException | IOException e) {
 			e.printStackTrace();
 		}
 	}

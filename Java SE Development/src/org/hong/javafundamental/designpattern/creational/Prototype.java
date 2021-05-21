@@ -1,8 +1,8 @@
 package org.hong.javafundamental.designpattern.creational;
 
 public interface Prototype {
-	public Prototype clone() throws CloneNotSupportedException;
+	Prototype clone() throws CloneNotSupportedException;
 	
-	public int getIntValue();
-	public void setIntValue(int intValue);
+	int getIntValue();
+	void setIntValue(int intValue);
 }

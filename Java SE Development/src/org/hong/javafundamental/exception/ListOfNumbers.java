@@ -6,14 +6,13 @@ import java.util.ArrayList;
 
 public class ListOfNumbers {
 
-    private List<Integer> list;
+	private final List<Integer> list = new ArrayList<>(SIZE);
     private static final int SIZE = 10;
-    private static final String fileName = "Data File/OutFile.txt";
+    private static final String FILE_NAME = "Java SE Development/Data File/OutFile.txt";
 
     public ListOfNumbers () {
-        list = new ArrayList<Integer>(SIZE);
         for (int i = 0; i < SIZE; i++) {
-            list.add(new Integer(i));
+            list.add(i);
         }
     }
 
@@ -23,15 +22,15 @@ public class ListOfNumbers {
 
     	try {
     		System.out.println("Entering" + " try statement");
-    		out = new PrintWriter(new FileWriter(fileName));
+    		out = new PrintWriter(new FileWriter(FILE_NAME));
 
     		for (int i = 0; i < SIZE; i++) {
     			out.println("Value at: " + i + " = " + list.get(i));
     		}
     	} catch (FileNotFoundException e) {
-    		System.out.println("Caught FileNotFoundExcpetion: " + e.getMessage());
+    		System.out.println("Caught FileNotFoundException: " + e.getMessage());
     	} catch (IOException e) {
-    		System.out.println("Caught IOExcpetion: " + e.getMessage());
+    		System.out.println("Caught IOException: " + e.getMessage());
     	} finally {
     		if (out != null) {
     			System.out.println("Closing PrintWriter resource!");
@@ -42,15 +41,15 @@ public class ListOfNumbers {
     
     public void writeListWithResource() {
 
-    	try (PrintWriter out = new PrintWriter(new FileWriter(fileName))) {
+    	try (PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME))) {
     		System.out.println("Entering" + " try statement");
     		for (int i = 0; i < SIZE; i++) {
     			out.println("Value at: " + i + " = " + list.get(i));
     		}
     	} catch (FileNotFoundException e) {
-    		System.out.println("Caught FileNotFoundExcpetion: " + e.getMessage());
+    		System.out.println("Caught FileNotFoundException: " + e.getMessage());
     	} catch (IOException e) {
-    		System.out.println("Caught IOExcpetion: " + e.getMessage());
+    		System.out.println("Caught IOException: " + e.getMessage());
     	} 
     }
     

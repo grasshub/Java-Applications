@@ -10,6 +10,7 @@ public class TeamManager extends EmployeeDecorator {
 			System.out.println(this.getClass().getName() + " is submitting the budget.");
 	}
 
+	@Override
 	public void dailyTask() {
 		employee.dailyTask();
 		managerTask();	

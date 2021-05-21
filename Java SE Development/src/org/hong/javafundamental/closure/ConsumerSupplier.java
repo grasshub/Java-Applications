@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConsumerSupplier {
+	private static final Logger logger = Logger.getLogger(ConsumerSupplier.class.getName());
 	
 	private static void printName(String name) {
-		System.out.println(name);
+		logger.log(Level.INFO, name);
 	}
 	
 	private static void printNames(Supplier<String> supplier) {
-		System.out.println(supplier.get());
+		logger.log(Level.INFO, supplier.get());
 	}
 
 	public static void main(String[] args) {
@@ -27,8 +30,8 @@ public class ConsumerSupplier {
 		names.add("John");
 		names.add("Richard");
 		
-		// Lambda expression returns suppiler
-		names.stream().forEach(name -> printNames(() -> name));
+		// Lambda expression returns supplier
+		names.forEach(name -> printNames(() -> name));
 		
 	}
 }

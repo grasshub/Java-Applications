@@ -1,12 +1,12 @@
 package org.hong.javafundamental.junit;
 
-import org.junit.*;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ABTest extends BTest {
 	
 	private AB ab;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		this.ab = new AB();
 	}

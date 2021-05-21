@@ -29,8 +29,8 @@ public class Varargs {
 	}
 
 	public static void main(String[] args) {
-		int min = min();
-		//int minimal = minimal();
+		var min = min();
+		// int minimal = minimal();
 	}
 
 }

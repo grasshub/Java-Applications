@@ -7,12 +7,12 @@ import java.util.Scanner;
 import java.util.Locale;
 
 public class ScanSum {
-	
+
     public static void main(String[] args) throws IOException {
 
         Scanner s = null;
         double sum = 0;
-        String inputName = "Data File/USNumbers.txt";
+        String inputName = "Java SE Development/Data File/USNumbers.txt";
 
         try {
             s = new Scanner(new BufferedReader(new FileReader(inputName)));
@@ -23,11 +23,12 @@ public class ScanSum {
                     sum += s.nextDouble();
                 } else {
                     s.next();
-                }   
+                }
             }
 
         } finally {
-            s.close();
+            if (s != null)
+                s.close();
         }
 
         System.out.println(sum);

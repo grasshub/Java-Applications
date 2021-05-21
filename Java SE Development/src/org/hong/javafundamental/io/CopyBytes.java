@@ -8,28 +8,18 @@ public class CopyBytes {
 	
     public static void main(String[] args) throws IOException {
 
-    	FileInputStream in = null;
-    	FileOutputStream out = null;
-    	String inputName = "Data File/FiftyMan.txt";
-    	String outputName = "Data File/OutFile.txt";
+		String inputName = "Java SE Development/Data File/FiftyMan.txt";
+    	String outputName = "Java SE Development/Data File/OutFile.txt";
 
-    	try {
-    		in = new FileInputStream(inputName);
-    		out = new FileOutputStream(outputName);
-    		int c;
+		try (FileInputStream in = new FileInputStream(inputName);
+			 FileOutputStream out = new FileOutputStream(outputName)) {
+			int c;
 
-    		while ((c = in.read()) != -1) {
-        		System.out.println((char)c);
-    			out.write(c);
-    		}
-    	} finally {
-    		if (in != null) {
-    			in.close();
-    		}
-    		if (out != null) {
-    			out.close();
-    		}
-    	}
+			while ((c = in.read()) != -1) {
+				System.out.println((char) c);
+				out.write(c);
+			}
+		}
 
     }
     

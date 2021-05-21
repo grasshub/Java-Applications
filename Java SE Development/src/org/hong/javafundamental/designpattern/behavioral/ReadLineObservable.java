@@ -16,7 +16,6 @@ public class ReadLineObservable extends Observable implements Runnable {
 			try {
 				inputString = bufferedReader.readLine();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			setChanged();

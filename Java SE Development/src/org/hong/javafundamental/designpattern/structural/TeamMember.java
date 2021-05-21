@@ -9,7 +9,8 @@ public class TeamMember extends EmployeeDecorator {
 	public void performTask() {
 		System.out.println(this.getClass().getName() + " is performing his assigned tasks.");
 	}
-	
+
+	@Override
 	public void dailyTask() {
 		employee.dailyTask();
 		memberTask();

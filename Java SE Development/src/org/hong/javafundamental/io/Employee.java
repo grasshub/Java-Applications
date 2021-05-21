@@ -11,8 +11,8 @@ public class Employee implements Serializable {
 	private static final long serialVersionUID = 1339159769143191807L;
 	
 	private final String name;
-	private int salary;
-	private Calendar joinDate;
+	private final int salary;
+	private final Calendar joinDate;
 	
 	public Employee(String name, int salary, Calendar joinDate) {
 		this.name = name;

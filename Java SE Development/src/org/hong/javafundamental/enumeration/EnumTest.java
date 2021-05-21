@@ -4,12 +4,7 @@ import static org.hong.javafundamental.enumeration.Planet.*;
 
 public class EnumTest {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
 		System.out.println("The mass of mercury: " + MERCURY.getMass());
 		System.out.println("The radius of mercury: " + MERCURY.getRadius());
 		System.out.println("The mass of venus: " + Planet.valueOf("VENUS").getMass());

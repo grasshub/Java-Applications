@@ -8,11 +8,11 @@ public class Deal {
 	
 	private static final int MINIMUM = 2;
 	// Make a normal 52 card deck
-	private static String[] suit = new String [] {
+	private static final String[] suit = new String [] {
 		"Spades", "hearts", "diamonds", "clubs"
 	};
 	
-	private static String [] rank = new String[] {
+	private static final String [] rank = new String[] {
 		"2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"
 	};
 	
@@ -23,7 +23,7 @@ public class Deal {
 	private static <E> List<E> dealHand(List<E> deck, int n) {
 		int deckSize = deck.size();
 		List<E> handView = deck.subList(deckSize - n, deckSize);
-		List<E> hand = new ArrayList<E>(handView);
+		List<E> hand = new ArrayList<>(handView);
 		
 		handView.clear();
 		return hand;
@@ -39,10 +39,9 @@ public class Deal {
 		int numHands = Integer.parseInt(args[0]);
 		int cardsPerHand = Integer.parseInt(args[1]);
 		
-		List<String> deck = new ArrayList<String>();
-		for (int i = 0; i < suit.length; i++) 
-			for (int j = 0; j < rank.length; j++)
-				deck.add(rank[j] + " of " + suit[i]);
+		List<String> deck = new ArrayList<>();
+		for (String s : suit)
+			for (String value : rank) deck.add(value + " of " + s);
 		
 		if (numHands * cardsPerHand > deck.size()) {
 			System.err.println(ERROR);

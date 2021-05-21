@@ -72,62 +72,65 @@ public class WatchDir {
 	
 	// Process all the events for keys queued to the watcher
 	private void processEvents() throws IOException {
-		
+
+		extracted();
+	}
+
+	private void extracted() {
 		for (;;) {
-			
-			WatchKey key;
-			
+
+			WatchKey key = null;
+
 			try {
 				key = watcher.take();
 			} catch (InterruptedException ex) {
-				return;
+				Thread.currentThread().interrupt();
 			}
-			
+
 			Path dir = keys.get(key);
 			if (dir == null) {
 				System.err.printf("WatchKey %s not registered for entry: %s%n", key, dir);
 				continue;
 			}
-			
+
 			for (WatchEvent<?> event: key.pollEvents()) {
 				WatchEvent.Kind<?> kind = event.kind();
-				
+
 				// skip the OVERFLOW event
-				if (kind == OVERFLOW) 
+				if (kind == OVERFLOW)
 					continue;
-				
+
 				// Context for directory entry event is the file name of entry
 				Path name = (Path)event.context();
 				Path childPath = dir.resolve(name);
-				
+
 				// print out the directory entry event
 				System.out.printf("%s: %s%n", event.kind().name(), childPath);
-				
+
 				// if directory is created, and watching recursively, then register it and its sub-directories
 				if (recursive && (kind == ENTRY_CREATE)) {
 					if (Files.isDirectory(childPath, LinkOption.NOFOLLOW_LINKS)) {
 						try {
 							registerAll(childPath);
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
 				}
 			}
-			
+
 			boolean valid = key.reset();
 			// directory associated with this key is inaccessible, so remove it from Map
 			if (!valid)
 				keys.remove(key);
-			
+
 			// if all directories are inaccessible, breaks for this method
 			if (keys.isEmpty()) {
 				break;
 			}
-		}		
+		}
 	}
-	
+
 	private static void usage() {
 		System.err.println("usage: java WatchDir [-r] dir");
 		System.exit(-1);

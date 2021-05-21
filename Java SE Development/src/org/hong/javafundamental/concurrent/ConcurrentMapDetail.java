@@ -16,12 +16,7 @@ public class ConcurrentMapDetail {
 	// Interning map atop ConcurrentMap -- BROKEN
 	public static String intern(String string) {
 		synchronized(map) { // Always wrong
-			String result = map.get(string);
-			if (result == null) {
-				map.put(string, string);
-				result = string;
-			}
-			return result;
+			return map.putIfAbsent(string, string);
 		}
 	}
 	
@@ -47,22 +42,18 @@ public class ConcurrentMapDetail {
 		
 		ExecutorService executorService = Executors.newFixedThreadPool(6);
 		
-		Runnable internRunnable = new Runnable() {
-		    public void run() {
-		        System.out.println("Asynchronous task");
-		        for (String key: data) {
-					System.out.println(intern(key));		
-				}
-		    }
+		Runnable internRunnable = () -> {
+			System.out.println("Asynchronous task");
+			for (String key: data) {
+				System.out.println(intern(key));
+			}
 		};
 		
-		Runnable internRevisedRunnable = new Runnable() {
-		    public void run() {
-		        System.out.println("Asynchronous task revised");
-		        for (String key: data) {
-					System.out.println(internRevised(key));		
-				}
-		    }
+		Runnable internRevisedRunnable = () -> {
+			System.out.println("Asynchronous task revised");
+			for (String key: data) {
+				System.out.println(internRevised(key));
+			}
 		};
 
 		// Execute intern and internRevised method in six threads

@@ -2,7 +2,7 @@ package org.hong.javafundamental.generics;
 
 public class NaturalNumber<T extends Number> {
 
-	private T n;
+	private final T n;
 
 	public NaturalNumber(T n) {
 		this.n = n;

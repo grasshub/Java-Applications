@@ -2,7 +2,7 @@ package org.hong.javafundamental.designpattern.behavioral;
 
 public class Wheel implements CarElement {
 	
-	private String name;
+	private final String name;
 	
 	public Wheel(String name) {
 		this.name = name;

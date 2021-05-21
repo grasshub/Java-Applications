@@ -4,9 +4,9 @@ import java.util.Date;
 
 public interface Employee {
 
-	public void join(Date joinDate);
-	public void terminate(Date terminateDate);
-	public void dailyTask();
+	void join(Date joinDate);
+	void terminate(Date terminateDate);
+	void dailyTask();
 
 	// other behaviors may reside (see sample code)
 }

@@ -1,42 +1,30 @@
 package org.hong.javafundamental.junit;
 
-import static org.junit.Assert.assertEquals;
+import java.util.logging.Level;
+import java.util.stream.Stream;
+import java.util.logging.Logger;
 
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-
-
-@RunWith(Parameterized.class)
 public class PrimeNumberTest {
+
+	Logger logger = Logger.getLogger(PrimeNumberTest.class.getName());
+
+	static Stream<Arguments> primeNumbers = Stream.of(
+			Arguments.of(2, true),
+			Arguments.of(4, false),
+			Arguments.of(5, true),
+			Arguments.of(6, false),
+			Arguments.of(8, false),
+			Arguments.of(9, false)
+	);
 	
-	private int number;
-	private boolean isPrime;
-	
-	public PrimeNumberTest(int number, boolean isPrime) {
-		this.number = number;
-		this.isPrime = isPrime;
-	}
-	
-	@Parameters
-	public static Iterable<Object[]> primeNumbers() {
-		
-		return Arrays.asList(new Object[][] {
-			{2, true},
-			{4, false},
-			{5, true},
-			{6, false},
-			{8, false},
-			{9, false}
-		});	
-	}
-	
-	@Test
-	public void validatePrimeNumbers() {
-		System.out.println("Parameterized test with parameters: " + number + " " + isPrime);
+	@ParameterizedTest
+	@VariableSource("primeNumbers")
+	public void validatePrimeNumbers(int number, boolean isPrime) {
+		logger.log(Level.INFO, "Parameterized test with parameters: {0} {1}", new Object[] { number, isPrime });
 		assertEquals(isPrime, PrimeNumber.isPrime(number));	
 	}
 

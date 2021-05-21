@@ -2,7 +2,7 @@ package org.hong.javafundamental.designpattern.structural;
 
 public class CoffeeOrderContext {
 	
-	private int tableNumber;
+	private final int tableNumber;
 	
 	public CoffeeOrderContext(int tableNumber) {
 		this.tableNumber = tableNumber;

@@ -4,8 +4,8 @@ import java.util.Map;
 
 public class Minus implements Expression {
 	
-	private Expression leftOperand;
-	private Expression rightOperand;
+	private final Expression leftOperand;
+	private final Expression rightOperand;
 	
 	public  Minus(Expression leftOperand, Expression rightOperand) {
 		this.leftOperand = leftOperand;

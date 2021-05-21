@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface IAdapter {
 	
-	public void printList(List<String> stringList);
+	void printList(List<String> stringList);
 
 }

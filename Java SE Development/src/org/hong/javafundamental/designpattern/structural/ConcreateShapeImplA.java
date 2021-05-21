@@ -1,10 +1,9 @@
 package org.hong.javafundamental.designpattern.structural;
 
+import javax.swing.*;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
-
-import javax.swing.JFrame;
 
 public class ConcreateShapeImplA extends Canvas implements ShapeImplementation {
 	
@@ -16,7 +15,8 @@ public class ConcreateShapeImplA extends Canvas implements ShapeImplementation {
 	private double radius;
 	private double width;
 	private double height;
-	
+
+	@Override
 	public void paint(Graphics graphics) {
 		
 		if (drawCircle) {
@@ -38,7 +38,7 @@ public class ConcreateShapeImplA extends Canvas implements ShapeImplementation {
 		
 		JFrame frame = new JFrame();
 		frame.setSize(400, 400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.getContentPane().add(this);
 		frame.setVisible(true);
 	}

@@ -11,7 +11,7 @@ public class ForkJoinPoolRunner {
 	
 	public static void main(String[] args) {
 		
-		List<Integer> sortList = new ArrayList<Integer>(SIZE);
+		List<Integer> sortList = new ArrayList<>(SIZE);
 		
 		// Adding 10000 random integer to sortList
 		for (int i = 0; i < SIZE; i++) {
@@ -19,7 +19,7 @@ public class ForkJoinPoolRunner {
 			sortList.add(value);
 		}
 		
-		QuickSort<Integer> quickSort = new QuickSort<Integer>(sortList);
+		QuickSort<Integer> quickSort = new QuickSort<>(sortList);
 		
 		ForkJoinPool pool = new ForkJoinPool();
 		pool.invoke(quickSort);

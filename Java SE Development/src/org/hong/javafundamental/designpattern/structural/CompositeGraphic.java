@@ -5,14 +5,14 @@ import java.util.List;
 
 public class CompositeGraphic implements Graphic {
 	
-	private List<Graphic> childGraphics = new ArrayList<Graphic>();
+	private final List<Graphic> childGraphics = new ArrayList<>();
 	
 	public void add(Graphic graphic) {
 		childGraphics.add(graphic);
 	}
 	
-	private void dispose(CompositeGraphic compositeGraphic) {
-		compositeGraphic = null;
+	private void dispose() {
+		CompositeGraphic compositeGraphic = null;
 	}
 	
 	public void remove(Graphic graphic) {
@@ -20,9 +20,8 @@ public class CompositeGraphic implements Graphic {
 		if (childGraphics.contains(graphic)) {
 			childGraphics.remove(graphic);
 			// need to remove composite with no child
-			// TODO could not dispose the object when it's method is not completed
 			if (childGraphics.isEmpty())
-				dispose(this);
+				dispose();
 		}
 		else 
 			for (Graphic graph : childGraphics) 

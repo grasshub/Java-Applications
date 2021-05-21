@@ -1,24 +1,26 @@
 package org.hong.javafundamental.principle;
 
 import java.util.function.Consumer;
+import java.util.logging.Logger;
 
 public class Resource {
+	Logger logger = Logger.getLogger(Resource.class.getName());
 	
 	// Execute around method for resource clean up
 	private Resource() {
-		System.out.println("External resource created");
+		logger.info("External resource created");
 	}
 	
 	public void firstOperation() {
-		System.out.println("First operation executed");
+		logger.info("First operation executed");
 	}
 	
 	public void secondOperation() {
-		System.out.println("Second operation executed");
+		logger.info("Second operation executed");
 	}
 
 	private void close() {
-		System.out.println("External resource cleaned up");
+		logger.info("External resource cleaned up");
 	}
 	
 	public static void use(Consumer<Resource> consumer) {

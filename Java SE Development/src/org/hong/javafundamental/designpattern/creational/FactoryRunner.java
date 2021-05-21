@@ -19,8 +19,8 @@ public class FactoryRunner {
 		*/
 
 		// read from System.in at Eclipse
-		BufferedReader bufferedReader = null;
 		String name = null;
+		BufferedReader bufferedReader = null;
 		System.out.println("Please enter a name:");
 
 		try {
