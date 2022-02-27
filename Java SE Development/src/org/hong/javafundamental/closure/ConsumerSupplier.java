@@ -7,28 +7,40 @@ import java.util.function.Supplier;
 
 public class ConsumerSupplier {
 	
-	private static void printName(String name) {
-		System.out.println(name);
-	}
-	
 	private static void printNames(Supplier<String> supplier) {
 		System.out.println(supplier.get());
 	}
 
 	public static void main(String[] args) {
-		Consumer<String> consumer = ConsumerSupplier::printName;
-		
-		consumer.accept("Paul");
-		consumer.accept("John");
-		consumer.accept("Richard");
+		// Consumer to modify the list.
+		Consumer<List<Integer>> modifyList = list -> {
+			for (int i = 0; i < list.size(); i++) {
+				list.set(i, list.get(i) * 2);
+			}
+		};
+
+		Consumer<List<Integer>> displayList = list -> list.forEach(System.out::println);
+
+		List<Integer> integers = new ArrayList<>();
+		integers.add(1);
+		integers.add(2);
+		integers.add(3);
+
+		modifyList.andThen(displayList).accept(integers);
+
+		// Consumer to print out name.
+		Consumer<String> display = System.out::println;
+
+		display.accept("Paul");
+		display.accept("John");
+		display.accept("Richard");
 		
 		List<String> names = new ArrayList<>();
 		names.add("Paul");
 		names.add("John");
 		names.add("Richard");
 		
-		// Lambda expression returns suppiler
-		names.stream().forEach(name -> printNames(() -> name));
-		
+		// Lambda expression returns supplier
+		names.forEach(name -> printNames(() -> name));
 	}
 }

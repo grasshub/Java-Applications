@@ -1,10 +1,6 @@
 package org.hong.javafundamental.closure;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -53,14 +49,11 @@ public class Lambda {
 		// accumulation, the last one is terminal method, until the terminal
 		// method is called, all the intermediate methods will be invoked.
 		// Otherwise, due to laziness of invocation, they will not be called.
-		List<Double> sqrtOfFirst100Primes = 
-			Stream.iterate(2, e -> e + 1)
-				  .filter(Lambda::isPrime)
-				  .map(Math::sqrt)
-				  .limit(100)
-				  .collect(Collectors.toList());
-		
-		return sqrtOfFirst100Primes;
+		return Stream.iterate(2, e -> e + 1)
+				.filter(Lambda::isPrime)
+				.map(Math::sqrt)
+				.limit(100)
+				.collect(Collectors.toList());
 	}
 	
 	private static void printSorted(List<Person> people, 
@@ -78,13 +71,14 @@ public class Lambda {
 		// Method reference when method takes the arguments form previous method 
 		// call passed in as pipelined.
 		integers.forEach(System.out::println);
-		
+
 		// Stream is a sequential used to perform aggregate actions on it.
-		System.out.println(
-			integers.stream()
-			.map(e -> e * e)
-			.reduce((total, e) -> total + e)
-			.get()
+		Optional<Integer> sumOfSquare = integers.stream()
+				.map(e -> e * e)
+				.reduce(Integer::sum);
+
+		System.out.println(sumOfSquare.isPresent()
+				? sumOfSquare.get() : "Sum of square for list of integer doesn't exist!"
 		);
 		
 		System.out.println(total(integers, e -> true));
@@ -92,6 +86,8 @@ public class Lambda {
 		System.out.println(total(integers, e -> e % 2 == 0));
 		// Predicate for all odd integer
 		System.out.println(total(integers, e -> e % 2 != 0));
+
+		System.out.println(sqrtOfFirst100Primes());
 		
 		// Stream is lazy (For all the actions)
 		// All the intermediate actions will only be performed if necessary.
@@ -148,16 +144,16 @@ public class Lambda {
 			e.printStackTrace();
 		}
 		
-		List<Person> people = Arrays.asList(
+		List<Person> people = new ArrayList<>(Arrays.asList(
 			new Person("Sara", 12),
 			new Person("Mark", 43),
 			new Person("Bob", 12),
-			new Person("Jill", 64));
+			new Person("Jill", 64)));
 		
 		printSorted(people, 
 			Comparator.comparing(Person::getAge).thenComparing(Person::getName));
 		
 		people.removeIf(p -> p.getAge() < 18);
-		
+		people.forEach(System.out::println);
 	}
 }
