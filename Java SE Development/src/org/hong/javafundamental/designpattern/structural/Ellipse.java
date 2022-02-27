@@ -7,8 +7,6 @@ public class Ellipse implements Graphic {
 	}
 	
 	// blank implementation for remove the leaf node
-	public void remove(Graphic graphic) {
-		
-	}
+	public void remove(Graphic graphic) {}
 
 }

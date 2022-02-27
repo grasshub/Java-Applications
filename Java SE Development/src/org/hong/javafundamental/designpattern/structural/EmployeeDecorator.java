@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class EmployeeDecorator implements Employee {
 
-	public Employee employee;
+	public final Employee employee;
 
 	public EmployeeDecorator(Employee employee) {
 		this.employee = employee;

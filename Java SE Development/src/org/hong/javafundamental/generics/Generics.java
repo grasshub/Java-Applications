@@ -98,13 +98,12 @@ public class Generics {
 		
 		A.assertionTest();
 		
-		List<String> ls = new ArrayList<String>();
+		List<String> ls = new ArrayList<>();
 		
 		try {
 			append(ls, String.class);
 			System.out.println("The size of list after append method: " + ls.size());
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -116,7 +115,7 @@ public class Generics {
 			System.out.println("The list of number: " + n);
 		
 		
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		//List<String>[] listArr = new List<String>[2];
 		if(list instanceof ArrayList<?>)
 			System.out.println("Good");
@@ -133,8 +132,8 @@ public class Generics {
 		Integer x = n.data;
 		System.out.println(x);
 
-		List<Integer> li = new ArrayList<Integer>();
-		List<Number> ln = new ArrayList<Number>();
+		List<Integer> li = new ArrayList<>();
+		List<Number> ln = new ArrayList<>();
 		addNumbers(li);
 		addNumbers(ln);
 
@@ -149,7 +148,7 @@ public class Generics {
 		System.out.println("The name of Integer class: "
 				+ person.getClass().getName());
 
-		List<? super B> aSub = new ArrayList<B>();
+		List<? super B> aSub = new ArrayList<>();
 		aSub.add(new B(2));
 		Object aO = aSub.get(0);
 		System.out.println(aO);
@@ -168,19 +167,19 @@ public class Generics {
 		 * count);
 		 */
 
-		List<B> bList = new ArrayList<B>();
+		List<B> bList = new ArrayList<>();
 		bList.add(new B(2));
 		List<? extends A> aList = bList;
 		A aNum = aList.get(0);
 		System.out.println(aNum);
 
-		List<Integer> ints = new ArrayList<Integer>();
+		List<Integer> ints = new ArrayList<>();
 		ints.add(4);
 		ints.add(2);
 		double sum = sumOfList(ints);
 		System.out.println("The sum of list: " + sum);
 
-		List<Number> nums = new ArrayList<Number>();
+		List<Number> nums = new ArrayList<>();
 		List<? super Integer> baseInt = nums;
 		baseInt.add(1);
 		nums.add(1);
@@ -191,16 +190,16 @@ public class Generics {
 
 		System.out.println("The numbers: " + baseInt.get(2));
 
-		List<? super Integer> iList = new ArrayList<Integer>();
+		List<? super Integer> iList = new ArrayList<>();
 		iList.add(1);
 		System.out.println("Number List: " + iList.get(0));
 		ints.add(2);
 		System.out.println("Number List: " + nums.get(1));
 
-		NaturalNumber<? extends Number> numberA = new NaturalNumber<Integer>(1);
+		NaturalNumber<? extends Number> numberA = new NaturalNumber<>(1);
 		System.out.println("Even number: " + numberA.isEven());
 
-		numberA = new NaturalNumber<Double>(2.0);
+		numberA = new NaturalNumber<>(2.0);
 		System.out.println("Even number: " + numberA.isEven());
 			
 	}

@@ -3,28 +3,25 @@ package org.hong.javafundamental.platform;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class ProcessBuilderRunner {
-	
-	// iTunes
-	private static final String PROGRAM_NAME = "C:/Program Files/iTunes/iTunes";
+	static Logger logger = Logger.getLogger(ProcessBuilderRunner.class.getName());
 	
 	public static void main(String[] args) throws IOException {
 		
 		// Use ProcessBuilder to launch application and print out environment variable
-		ProcessBuilder pb = new ProcessBuilder(PROGRAM_NAME);
+		ProcessBuilder pb = new ProcessBuilder("java", "-version");
 		Process process = pb.start();
 		
 		Map<String, String> env = pb.environment();
-		for (String envName: env.keySet()) {
-			System.out.printf("%s = %s%n", envName, env.get(envName));
+		for (Map.Entry<String, String> envEntry: env.entrySet()) {
+			logger.info(envEntry.getKey() + " = " + envEntry.getValue());
 		}
 		
-		System.out.println();
-		
 		Properties systemProperties = System.getProperties();
-		for (Object propertyName: systemProperties.keySet())
-			System.out.printf("%s = %s%n", propertyName, systemProperties.get(propertyName));
+		for (Map.Entry<Object, Object> propertyName: systemProperties.entrySet())
+			logger.info(propertyName.getKey() + " = " + propertyName.getValue());
 		
 		process.destroy();
 	}

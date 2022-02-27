@@ -10,14 +10,13 @@ import javax.swing.JPanel;
 public class MediatorRunner extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = -3422345241935369779L;
-	private Mediator mediator = new ConcreteMediator();
-	private JButton button;
-	
+
 	public MediatorRunner() {
 		
 		JPanel panel = new JPanel();
-		
-		button = new BookButton(mediator);
+
+		Mediator mediator = new ConcreteMediator();
+		JButton button = new BookButton(mediator);
 		button.addActionListener(this);
 		panel.add(button);
 		

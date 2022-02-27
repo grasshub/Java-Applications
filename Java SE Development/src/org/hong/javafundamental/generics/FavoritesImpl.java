@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FavoritesImpl implements Favorites {
-	private Map<Class<?>, Object> favorites = new HashMap<>();
+	private final Map<Class<?>, Object> favorites = new HashMap<>();
 			
 	@Override
 	public <T> void putFavorite(Class<T> type, T instance) {

@@ -11,7 +11,7 @@ import java.util.TreeSet;
 public class FindDuplicates {
 	
 	private static void findDuplicates(String[] args) {
-		Set<String> set = new TreeSet<>(); //new HashSet<>();
+		Set<String> set = new TreeSet<>();
 		
 		for (String string: args) 
 			if (!set.add(string)) 
@@ -36,9 +36,8 @@ public class FindDuplicates {
 	
 	private static void shuffle(String[] args) {
 		List<String> list = new ArrayList<>();
-		
-		for (String string: args) 
-			list.add(string);
+
+		Collections.addAll(list, args);
 		
 		Collections.shuffle(list, new Random());
 		

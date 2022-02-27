@@ -2,13 +2,9 @@ package org.hong.javafundamental.util;
 
 public final class OsUtils
 {
-   private static String OS = null;
-   
    public static String getOsName()
    {
-      if(OS == null) 
-    	  OS = System.getProperty("os.name");
-      return OS;
+      return System.getProperty("os.name");
    }
    
    public static boolean isWindows()

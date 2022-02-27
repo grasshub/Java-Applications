@@ -5,7 +5,7 @@ import javax.swing.JTextField;
 public class PickedName extends JTextField {
 	
 	private static final long serialVersionUID = 8513052904464741137L;
-	private MediatorGUI mediator;
+	private transient MediatorGUI mediator;
 	
 	public PickedName(MediatorGUI mediator) {
 		super(20);

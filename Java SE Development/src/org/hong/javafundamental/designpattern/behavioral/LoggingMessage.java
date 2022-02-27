@@ -2,8 +2,8 @@ package org.hong.javafundamental.designpattern.behavioral;
 
 public class LoggingMessage {
 
-	private String message;
-	private String level;
+	private final String message;
+	private final String level;
 	public static final String INFORMATION = "information";
 	public static final String ERROR = "error";
 	public static final String CRITICAL_ERROR = "critical error";

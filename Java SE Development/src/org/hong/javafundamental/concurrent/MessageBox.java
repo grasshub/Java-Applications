@@ -14,6 +14,7 @@ public class MessageBox {
 				wait();
 			} catch (InterruptedException e) {
 				// Ignore
+				Thread.currentThread().interrupt();
 			}
 		
 		// Toggle the flag
@@ -31,6 +32,7 @@ public class MessageBox {
 				wait();
 			} catch (InterruptedException e) {
 				// Ignore
+				Thread.currentThread().interrupt();
 			}
 		
 		// Toggle the flag

@@ -5,7 +5,7 @@ import javax.swing.JButton;
 public class BookButton extends JButton implements Client {
 	
 	private static final long serialVersionUID = -2353863975368607049L;
-	Mediator mediator;
+	transient Mediator mediator;
 	
 	public BookButton(Mediator mediator) {
 		super("Book");

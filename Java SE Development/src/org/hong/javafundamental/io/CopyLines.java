@@ -12,29 +12,18 @@ public class CopyLines {
 	
 	public static void main(String[] args) throws IOException {
 
-    	BufferedReader in = null;
-    	PrintWriter out = null;
-    	String line;
-    	String inputName = "Data File/FiftyMan.txt";
+		String line;
+    	String inputName = "Java SE Development/Data File/FiftyMan.txt";
 
-    	String outputName = "Data File/OutFile.txt";
+    	String outputName = "Java SE Development/Data File/OutFile.txt";
 
-    	try {
-    		in = new BufferedReader(new FileReader(inputName));
-    		out = new PrintWriter(new BufferedWriter(new FileWriter(outputName)));
+		try (BufferedReader in = new BufferedReader(new FileReader(inputName));
+			 PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(outputName)))) {
 
-    		while ((line = in.readLine()) != null) {
-    			out.println(line);
-    		}
-    	}
-    	finally {
-    		if (in != null) {
-    			in.close();
-    		}
-    		if (out != null) {
-    			out.close();
-    		}
-    	} 
+			while ((line = in.readLine()) != null) {
+				out.println(line);
+			}
+		}
 
     }
 

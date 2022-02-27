@@ -8,8 +8,8 @@ public class PickedNameList extends JList<Object> {
 	
 	private static final long serialVersionUID = -8869831391494097898L;
 	@SuppressWarnings("unused")
-	private MediatorGUI mediator;
-	private DefaultListModel<Object> listModel = new DefaultListModel<Object>();
+	private transient MediatorGUI mediator;
+	private DefaultListModel<Object> listModel = new DefaultListModel<>();
 	
 	public PickedNameList(MediatorGUI mediator) {
 		super();

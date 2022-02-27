@@ -1,15 +1,18 @@
 package org.hong.javafundamental.junit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import java.util.logging.Logger;
 
 public abstract class BTest extends ATest {
+	Logger logger = Logger.getLogger(BTest.class.getName());
 	
 	protected abstract B getInstance();
 	
 	@Test
 	public void testB() {
 		getInstance().b();
-		System.out.println("In Test B class!");
+		logger.info("In Test B class!");
 	}
 
 }

@@ -12,8 +12,8 @@ public class CalendarRunner {
 	public static void main(String[] arg) {
 		
 		// the milliseconds for one hour
-		int HOUR_IN_MILLISECOND = 60 * 60 * 1000;
-		String NEW_YORK = "America/New_York";
+		final int HOUR_IN_MILLISECOND = 60 * 60 * 1000;
+		final String NEW_YORK = "America/New_York";
 		
 		// get the supported ids for GMT-05:00 (Eastern Standard Time)
 		String[] ids = TimeZone.getAvailableIDs(-5 * HOUR_IN_MILLISECOND);

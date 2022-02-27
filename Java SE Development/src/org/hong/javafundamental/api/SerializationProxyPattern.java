@@ -19,26 +19,27 @@ public class SerializationProxyPattern {
 		
 		SerializationProxy(EnumSet<E> set) {
 			// set.elementType and ZERO_LENGTH_ENUM_ARRAY are EnumSet<E> fields
-			elementType = null; //set.elementType;
-			elements = null; // set.toArray(ZERO_LENGTH_ENUM_ARRAY);
+			elementType = null;
+			elements = null;
 		}
 		
 		// Put a readResolve method on the proxy
 		// Use any methods in the public API of the enclosing class to
 		// reconstitute instance
-		private Object readResolve() {
+		private EnumSet<E> readResolve() {
 			EnumSet<E> result = EnumSet.noneOf(elementType);
-			for (Enum e: elements) {
-				result.add((E)e);
+			if (elements != null) {
+				for (Enum<?> e : elements) {
+					result.add((E) e);
+				}
 			}
 			
 			return result;
 		}
-		
 	}
 
 	public static void main(String[] args) {
-
+		// Verify Serialization Proxy pattern.
 	}
 
 }

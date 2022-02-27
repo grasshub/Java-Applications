@@ -11,11 +11,11 @@ import javax.swing.JScrollPane;
 public class MediatorGUIRunner extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = -6900504903443577953L;
-	private MediatorGUI mediator = new NameListMediator();
-	
+
 	public MediatorGUIRunner() {
 		
 		JPanel panel = new JPanel();
+		MediatorGUI mediator = new NameListMediator();
 		panel.add(new PickedName(mediator));
 		panel.add(new CopyButton(this, mediator));
 		panel.add(new ClearButton(this, mediator));

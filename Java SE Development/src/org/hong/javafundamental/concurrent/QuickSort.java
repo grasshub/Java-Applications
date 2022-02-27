@@ -6,10 +6,10 @@ import java.util.concurrent.RecursiveAction;
 public class QuickSort<T extends Comparable<T>> extends RecursiveAction {
 	
 	private static final long serialVersionUID = -7067438592049181237L;
-	private List<T> data;
-	private int left;
-	private int right;
-	private final int ZERO = 0;
+	private final transient List<T> data;
+	private final int left;
+	private final int right;
+	private static final int ZERO = 0;
 	
 	public QuickSort(List<T> data) {
 		this.data = data;
@@ -63,7 +63,7 @@ public class QuickSort<T extends Comparable<T>> extends RecursiveAction {
 			// Get lists of smaller and bigger items and final position of pivot
 			pivot = partition(pivot);
 			// Recursively sort elements smaller and bigger than the pivot
-			invokeAll(new QuickSort<T>(data, left, pivot -1), new QuickSort<T>(data, pivot + 1, right)); 
+			invokeAll(new QuickSort<>(data, left, pivot -1), new QuickSort<>(data, pivot + 1, right));
 		}
 	}	
 

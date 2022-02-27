@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileStore;
 import java.nio.file.FileSystems;
@@ -26,27 +27,25 @@ import static java.nio.file.StandardCopyOption.*;
 
 public class FileRunner {
 	
-	private static final String destinationName = "Data File/OutFile.txt";
-	private static final String sourceName = "Data File/USNumbers.txt";
-	private static final String fileName = "Data File/NewFile";
-	private static final String tmpFileName = "Data File";
-	private static final String directoryName = "Data File/foo";
-	private static final String eclipseWorkspace = "/Eclipse Workspace/Java SE Development";
-	private static final String linkName = "Data File/link";
-	private static final String startDirName = ".";
-	private static final String deleteDirName = "Temp";
+	private static final String DESTINATION_NAME = "Java SE Development/Data File/OutFile.txt";
+	private static final String SOURCE_NAME = "Java SE Development/Data File/USNumbers.txt";
+	private static final String FILE_NAME = "Java SE Development/Data File/NewFile";
+	private static final String TMP_FILE_NAME = "Java SE Development/Data File";
+	private static final String DIRECTORY_NAME = "Java SE Development/Data File/foo";
+	private static final String LINK_NAME = "Java SE Development/Data File/link";
+	private static final String START_DIR_NAME = ".";
+	private static final String DELETE_DIR_NAME = "Java SE Development/Temp";
 	
 	public static void main(String[] args) throws IOException {
 		
-		Path destinationPath = Paths.get(destinationName);
-		Path sourcePath = Paths.get(sourceName);
-		Path filePath = Paths.get(fileName);
-		Path tmpFilePath = Paths.get(tmpFileName);
-		Path directoryPath = Paths.get(directoryName);
-		Path eclipsePath = Paths.get(eclipseWorkspace);
-		Path link = Paths.get(linkName);
-		Path startPath = Paths.get(startDirName);	
-		Path deletePath = Paths.get(deleteDirName);
+		Path destinationPath = Paths.get(DESTINATION_NAME);
+		Path sourcePath = Paths.get(SOURCE_NAME);
+		Path filePath = Paths.get(FILE_NAME);
+		Path tmpFilePath = Paths.get(TMP_FILE_NAME);
+		Path directoryPath = Paths.get(DIRECTORY_NAME);
+		Path link = Paths.get(LINK_NAME);
+		Path startPath = Paths.get(START_DIR_NAME);
+		Path deletePath = Paths.get(DELETE_DIR_NAME);
 		
 		System.out.println("File exists: " + Files.exists(destinationPath));
 		System.out.println("File not exists: " + Files.notExists(destinationPath));
@@ -86,20 +85,18 @@ public class FileRunner {
 		System.out.println(fileStore.getTotalSpace());
 		System.out.println(fileStore.getUnallocatedSpace());
 		System.out.println(fileStore.getUsableSpace());
-		
-		System.out.println(Files.isSameFile(destinationPath, Paths.get("/Eclipse Workspace/Java SE Development/Properties File")));	
-		
+
 		Files.copy(sourcePath, destinationPath, REPLACE_EXISTING);
 		
-		BufferedInputStream bufferedStream = new BufferedInputStream(new FileInputStream(sourceName));
+		BufferedInputStream bufferedStream = new BufferedInputStream(new FileInputStream(SOURCE_NAME));
 		Files.copy(bufferedStream, destinationPath, REPLACE_EXISTING);
 		if(bufferedStream != null)
 			bufferedStream.close();
+
+		Files.move(sourcePath, Paths.get("Java SE Development/Properties File/USNumbers.txt"), REPLACE_EXISTING);
+		Files.move(Paths.get("Java SE Development/Properties File/USNumbers.txt"), sourcePath, REPLACE_EXISTING);
 		
-		Files.move(sourcePath, Paths.get("Properties File/USNumbers.txt"), REPLACE_EXISTING);
-		Files.move(Paths.get("Properties File/USNumbers.txt"), sourcePath, REPLACE_EXISTING);
-		
-		Charset cs = Charset.forName("US-ASCII");
+		Charset cs = StandardCharsets.US_ASCII;
 		List<String> contentList = Files.readAllLines(sourcePath, cs);
 		for (String content : contentList)
 			System.out.println(content);
@@ -117,8 +114,10 @@ public class FileRunner {
 			}
 		} 
 		
-		try (SeekableByteChannel sourceSbc = Files.newByteChannel(sourcePath, StandardOpenOption.READ, StandardOpenOption.WRITE);
-			 SeekableByteChannel destinationSbc = Files.newByteChannel(destinationPath, StandardOpenOption.READ, StandardOpenOption.WRITE)) {
+		try (SeekableByteChannel sourceSbc =
+					 Files.newByteChannel(sourcePath, StandardOpenOption.READ, StandardOpenOption.WRITE);
+			 SeekableByteChannel destinationSbc =
+					 Files.newByteChannel(destinationPath, StandardOpenOption.READ, StandardOpenOption.WRITE)) {
 			ByteBuffer buffer = ByteBuffer.allocate(10);
 			
 			while (sourceSbc.read(buffer) > 0) {
@@ -151,23 +150,8 @@ public class FileRunner {
 		Path tmpPath = Files.createTempDirectory(tmpFilePath, null);
 		Files.deleteIfExists(tmpPath);
 		
-		// list all the contents of directory
-		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(eclipsePath, "{bin,src}")) {
-			for (Path path: directoryStream) 
-				System.out.println(path.getFileName());		
-		}
-		
 		// declares a filter based on directory type
-		DirectoryStream.Filter<Path> filter = new DirectoryStream.Filter<Path>() {
-			public boolean accept(Path path) throws IOException {
-				return Files.isDirectory(path);
-			}		
-		};
-		
-		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(eclipsePath, filter)) {
-			for (Path path: directoryStream) 
-				System.out.println(path.getFileName());		
-		}
+		DirectoryStream.Filter<Path> filter = Files::isDirectory;
 		
 		//Path softLnk = Files.createSymbolicLink(softLinkPath, tmpFilePath);
 		//boolean isSymbolicLink = Files.isSymbolicLink(softLnk);

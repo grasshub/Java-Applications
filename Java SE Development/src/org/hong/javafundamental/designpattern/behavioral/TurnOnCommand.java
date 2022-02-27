@@ -2,7 +2,7 @@ package org.hong.javafundamental.designpattern.behavioral;
 
 public class TurnOnCommand implements UndoableCommand {
 	
-	private Receiver target;
+	private final Receiver target;
 	
 	public TurnOnCommand(Receiver receiver) {
 		target = receiver;

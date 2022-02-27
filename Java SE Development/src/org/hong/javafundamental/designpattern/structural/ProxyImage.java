@@ -3,7 +3,7 @@ package org.hong.javafundamental.designpattern.structural;
 public class ProxyImage implements Image {
 	
 	private Image image;
-	private String fileName;
+	private final String fileName;
 	
 	public ProxyImage(String fileName) {
 		this.fileName = fileName;

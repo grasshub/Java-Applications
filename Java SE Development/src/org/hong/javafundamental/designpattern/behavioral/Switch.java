@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Switch {
 	
-	private List<UndoableCommand> commandHistory = new ArrayList<UndoableCommand>();
+	private final List<UndoableCommand> commandHistory = new ArrayList<UndoableCommand>();
 	
 	public Switch() {
 		

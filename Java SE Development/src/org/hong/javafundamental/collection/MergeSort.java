@@ -19,11 +19,14 @@ public class MergeSort {
 		List<Comparable<E>> result = new ArrayList<>();
 		
 		while (left.size() > ZERO || right.size() > ZERO) 
-			if (left.size() > ZERO && right.size() > ZERO)
-				if (left.get(ZERO).compareTo((E) right.get(ZERO)) <= ZERO)
+			if (left.size() > ZERO && right.size() > ZERO) {
+				if (left.get(ZERO).compareTo((E) right.get(ZERO)) <= ZERO) {
 					result.add(left.remove(ZERO));
-				else
+				}
+				else {
 					result.add(right.remove(ZERO));
+				}
+			}
 			else if (left.size() > ZERO) {
 				result.addAll(left);
 				left.clear();
@@ -37,14 +40,14 @@ public class MergeSort {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static <E> List<? extends Comparable<E>> merge_sort(List<? extends Comparable<E>> list) {
+	private static <E> List<? extends Comparable<E>> mergeSort(List<? extends Comparable<E>> list) {
 		
 		// if list size is 0 (empty) or 1, consider it sorted and return it
 		// (using less than or equal prevents infinite recursion for a zero length list
 		if (list.size() <= ONE) 
 			return list;
 		
-		// else list size is greater than 1, so split the list into two sublists
+		// else list size is greater than 1, so split the list into two sublist
 		List<Comparable<E>> left = new ArrayList<>();
 		List<Comparable<E>> right = new ArrayList<>();
 		int middle = list.size() / TWO;
@@ -54,8 +57,8 @@ public class MergeSort {
 		
 		// recursively call merge_sort() to further split each sublist 
 		// until sublist size is 1
-		left = (List<Comparable<E>>) merge_sort(left);
-		right = (List<Comparable<E>>) merge_sort(right);
+		left = (List<Comparable<E>>) mergeSort(left);
+		right = (List<Comparable<E>>) mergeSort(right);
 		
 		// merge the sublists returned from prior calls to merge_sort()
 		// and return the resulting merged sublist
@@ -67,7 +70,7 @@ public class MergeSort {
 		
 		List<Integer> list = Arrays.asList(INT_ARRAY);
 		
-		list = (List<Integer>) merge_sort(list);
+		list = (List<Integer>) mergeSort(list);
 		System.out.println(list);
 	}
 

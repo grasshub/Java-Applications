@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Cache {
 	
-	private List<Service> services;
+	private final List<Service> services;
 	
 	public Cache() {
-		services = new ArrayList<Service>();
+		services = new ArrayList<>();
 	}
 	
 	public Service getService(String serviceName) {

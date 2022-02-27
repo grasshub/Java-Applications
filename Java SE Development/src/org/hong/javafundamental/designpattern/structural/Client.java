@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Client {
 	
-	private IAdapter adapter;
+	private final IAdapter adapter;
 	
 	public Client(IAdapter adapter) {
 		this.adapter = adapter;

@@ -32,13 +32,14 @@ public class SimpleThreads {
 			};
 			
 			try {
-				for (int i = 0; i < messageList.length; i++) {
+				for (String s : messageList) {
 					// Pause for 4 seconds
 					Thread.sleep(FOUR_SECONDS);
-					threadMessage(messageList[i]);
+					threadMessage(s);
 				}
 			} catch (InterruptedException ex) {
 				threadMessage("MessageLoop didn't finish!");
+				Thread.currentThread().interrupt();
 			}
 		}
 		

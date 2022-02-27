@@ -9,10 +9,10 @@ import java.util.Map;
 
 public class Parser implements Expression {
 	
-	private Expression syntaxTree;
+	private final Expression syntaxTree;
 	
 	public Parser(String expression) {
-		Deque<Expression> expressionStack = new ArrayDeque<Expression>();
+		Deque<Expression> expressionStack = new ArrayDeque<>();
 		List<String> variableList = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
 		//spit input token on empty space
 		for (String token : expression.split(" ")) {

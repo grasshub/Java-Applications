@@ -9,7 +9,7 @@ public class InterpretRunner {
 		//interprets the expression "10 w x z - + +" in reverse polish notation
 		String expression = "10 w x z - + +";
 		Parser parser = new Parser(expression);
-		Map<String, Expression> context = new HashMap<String, Expression>();
+		Map<String, Expression> context = new HashMap<>();
 		
 		context.put("w", new Number(5));
 		context.put("x", new Number(10));

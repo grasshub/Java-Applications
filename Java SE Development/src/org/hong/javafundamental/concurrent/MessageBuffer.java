@@ -6,8 +6,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class MessageBuffer {
 	
-	private final int SIZE = 100;
-	private final int ZERO = 0;
+	private static final int SIZE = 100;
+	private static final int ZERO = 0;
 	// Messages sent from producer to consumer
 	private final String[] messages = new String[SIZE];
 	private int count;

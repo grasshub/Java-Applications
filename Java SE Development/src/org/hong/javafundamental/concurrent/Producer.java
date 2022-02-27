@@ -4,10 +4,11 @@ import java.util.Random;
 
 public class Producer implements Runnable {
 	
-	private MessageBox messageBox;
-	private final int FIVE_SECONDS = 5 * 1000;
-	private final String DONE = "Done";
-	
+	private final MessageBox messageBox;
+
+	// Using random number to pause the message producing
+	private final Random random = new Random();
+
 	public Producer(MessageBox messageBox) {
 		this.messageBox = messageBox;
 	}
@@ -20,21 +21,21 @@ public class Producer implements Runnable {
 				"Little lambs eat ivy",
 				"A kid will eat ivy too"
 		};
-		
-		// Using random number to pause the message producing 
-		Random random = new Random(); 
-				
-		for (int i = 0; i < messageList.length; i++) {
-			messageBox.put(messageList[i]);
+
+		for (String s : messageList) {
+			messageBox.put(s);
 			// Pause for maximum 5 seconds
 			try {
+				final int FIVE_SECONDS = 5 * 1000;
 				Thread.sleep(random.nextInt(FIVE_SECONDS));
 			} catch (InterruptedException e) {
 				//Ignore
+				Thread.currentThread().interrupt();
 			}
 		}
 		
 		// Signals the end of message
+		final String DONE = "Done";
 		messageBox.put(DONE);
 	}
 

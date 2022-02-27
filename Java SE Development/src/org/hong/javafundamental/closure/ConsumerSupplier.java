@@ -4,11 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConsumerSupplier {
+	private static final Logger logger = Logger.getLogger(ConsumerSupplier.class.getName());
 	
+<<<<<<< HEAD
+=======
+	private static void printName(String name) {
+		logger.log(Level.INFO, name);
+	}
+	
+>>>>>>> 6be4e3049d0fa6b6a55515a142a2cc90f94c3049
 	private static void printNames(Supplier<String> supplier) {
-		System.out.println(supplier.get());
+		logger.log(Level.INFO, supplier.get());
 	}
 
 	public static void main(String[] args) {
@@ -42,5 +52,9 @@ public class ConsumerSupplier {
 		
 		// Lambda expression returns supplier
 		names.forEach(name -> printNames(() -> name));
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 6be4e3049d0fa6b6a55515a142a2cc90f94c3049
 	}
 }

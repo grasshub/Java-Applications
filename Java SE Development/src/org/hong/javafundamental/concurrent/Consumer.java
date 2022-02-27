@@ -1,29 +1,29 @@
 package org.hong.javafundamental.concurrent;
 
-import java.util.Random;
+import lombok.RequiredArgsConstructor;
 
+import java.security.SecureRandom;
+
+@RequiredArgsConstructor
 public class Consumer implements Runnable {
 
-	private MessageBox messageBox;
-	private final String DONE = "Done";
-	private final int FIVE_SECONDS = 5 * 1000;
-	
-	public Consumer(MessageBox messageBox) {
-		this.messageBox = messageBox;
-	}
-	
+	private final MessageBox messageBox;
+	static final String DONE = "Done";
+	static final int FIVE_SECONDS = 5 * 1000;
+	// Using secure random number to pause the message consuming
+	private final SecureRandom secureRandom = new SecureRandom();
+
 	public void run() {
-		// Using random number to pause the message consuming 
-		Random random = new Random(); 
 		String message;
 
 		while (!(message = messageBox.take()).equalsIgnoreCase(DONE)) {
 			System.out.println("Message received: " + message);
 			// Pause for maximum 5 seconds
 			try {
-				Thread.sleep(random.nextInt(FIVE_SECONDS));
+				Thread.sleep(secureRandom.nextInt(FIVE_SECONDS));
 			} catch (InterruptedException e) {
 				//Ignore
+				Thread.currentThread().interrupt();
 			}
 		}		
 	}

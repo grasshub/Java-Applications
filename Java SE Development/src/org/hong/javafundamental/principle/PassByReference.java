@@ -1,6 +1,10 @@
 package org.hong.javafundamental.principle;
 
+import java.util.logging.Logger;
+
 public class PassByReference {
+
+	static Logger logger = Logger.getLogger(PassByReference.class.getName());
 	
 	public static void main(String[] arg) {
 		
@@ -19,7 +23,7 @@ public class PassByReference {
 		 * its own version. However, if method returns the local version of argument
 		 * and assign it to original object, it could change original object.
 		 */
-		System.out.println(anotherPerson.getName());
-		System.out.println(person.getName());
+		logger.info(anotherPerson.getName());
+		logger.info(person.getName());
 	}
 }
