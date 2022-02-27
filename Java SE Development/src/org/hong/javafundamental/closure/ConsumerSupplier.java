@@ -9,14 +9,7 @@ import java.util.logging.Logger;
 
 public class ConsumerSupplier {
 	private static final Logger logger = Logger.getLogger(ConsumerSupplier.class.getName());
-	
-<<<<<<< HEAD
-=======
-	private static void printName(String name) {
-		logger.log(Level.INFO, name);
-	}
-	
->>>>>>> 6be4e3049d0fa6b6a55515a142a2cc90f94c3049
+
 	private static void printNames(Supplier<String> supplier) {
 		logger.log(Level.INFO, supplier.get());
 	}
@@ -29,7 +22,7 @@ public class ConsumerSupplier {
 			}
 		};
 
-		Consumer<List<Integer>> displayList = list -> list.forEach(System.out::println);
+		Consumer<List<Integer>> displayList = list -> list.forEach(x -> logger.log(Level.INFO, x.toString()));
 
 		List<Integer> integers = new ArrayList<>();
 		integers.add(1);
@@ -39,7 +32,7 @@ public class ConsumerSupplier {
 		modifyList.andThen(displayList).accept(integers);
 
 		// Consumer to print out name.
-		Consumer<String> display = System.out::println;
+		Consumer<String> display = x -> logger.log(Level.INFO, x);
 
 		display.accept("Paul");
 		display.accept("John");
@@ -52,9 +45,5 @@ public class ConsumerSupplier {
 		
 		// Lambda expression returns supplier
 		names.forEach(name -> printNames(() -> name));
-<<<<<<< HEAD
-=======
-		
->>>>>>> 6be4e3049d0fa6b6a55515a142a2cc90f94c3049
 	}
 }
