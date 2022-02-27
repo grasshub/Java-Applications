@@ -58,5 +58,4 @@ public class ListOfNumbers {
     	nums.writeList(); 
     	nums.writeListWithResource();
     }
-    
 }
